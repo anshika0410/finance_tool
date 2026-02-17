@@ -1,3 +1,19 @@
+# Dependencies
+**/node_modules
+
+# Environment variables
+.env
+
+# Database
+*.db
+*.sqlite
+
+# Logs
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Backup
 _backup
-server/node_modules
-client/node_modules
