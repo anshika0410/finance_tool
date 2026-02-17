@@ -10,7 +10,22 @@ A simple personal finance tool to record and review expenses.
 - Persistence via SQLite.
 - Idempotency support for unreliable networks.
 
+## Data Model
+- **Expenses Table**:
+  - `id`: Integer (Primary Key)
+  - `amount`: Integer (in cents)
+  - `category`: Text
+  - `description`: Text
+  - `date`: Text (ISO 8601 Date String)
+  - `idempotency_key`: Text (Unique, for retry handling)
+  - `created_at`: DateTime
+
+## API Endpoints
+- `GET /expenses`: List expenses. Supports `?category=X` and `?sort=date_desc`.
+- `POST /expenses`: Create expense. Requires `amount`, `category`, `description`, `date`. Optional `idempotencyKey`.
+
 ## Design Decisions
+- **Backend structure**: Refactored into `controllers` and `routes` for better separation of concerns.
 - **Backend**: Express.js for simplicity and flexibility.
 - **Database**: SQLite. Chosen for zero-configuration, reliability (ACID), and ease of use in a "production-like" assignment environment without needing a separate database server process.
 - **Frontend**: React (Vite) for a modern, responsive UI.
