@@ -40,6 +40,7 @@ A simple personal finance tool to record and review expenses.
    ```
 2. **Client**:
    ```bash
+   cd client
    npm run dev
    ```
 
