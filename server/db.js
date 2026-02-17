@@ -1,13 +1,17 @@
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 
-const dbPath = path.resolve(__dirname, 'expenses.db');
+const dbPath = process.env.NODE_ENV === 'test'
+    ? ':memory:'
+    : path.resolve(__dirname, 'expenses.db');
+
+console.log(`[DB] Environment: ${process.env.NODE_ENV}, Path: ${dbPath}`);
 
 const db = new sqlite3.Database(dbPath, (err) => {
     if (err) {
-        console.error('Could not connect to database', err);
+        // console.error('Could not connect to database', err);
     } else {
-        console.log('Connected to SQLite database');
+        // console.log('Connected to SQLite database');
     }
 });
 
@@ -24,9 +28,9 @@ db.serialize(() => {
         )
     `, (err) => {
         if (err) {
-            console.error('Error creating table', err);
+            // console.error('Error creating table', err);
         } else {
-            console.log('Expenses table ready');
+            // console.log('Expenses table ready');
         }
     });
 });
