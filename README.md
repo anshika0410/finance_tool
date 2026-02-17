@@ -40,7 +40,22 @@ A simple personal finance tool to record and review expenses.
    ```
 2. **Client**:
    ```bash
-   cd client
-   npm install
    npm run dev
    ```
+
+## Design & Trade-offs
+
+### Key Design Decisions
+- **Architecture**: Separated Client (React) and Server (Express) to demonstrate a full-stack approach with clear separation of concerns.
+- **Database**: Chosen **SQLite** for its zero-configuration and ACID compliance. It mimics a real relational database without the overhead of running a separate server process for this assignment.
+- **Idempotency**: Implemented a robust retry mechanism using client-generated UUIDs (`idempotency-key` header) to handle potential network failures without duplicating expenses.
+
+### Trade-offs (Timebox & Scope)
+- **Persistence on Serverless**: Deployed to Vercel for ease of access, but with the known trade-off that **SQLite data is ephemeral** in a serverless environment. A production app would use an external DB (e.g., Supabase, Turso).
+- **Authentication**: Omitted user accounts/login to focus purely on the core expense tracking value and robust API logic within the timeframe.
+- **Testing**: Focused on **Backend Integration Tests** (Jest/Supertest) to cover the critical business logic and reliability features. UI tests were omitted in favor of manual verification for the visual components.
+
+### Intentionally Omitted
+- **Complex State Management**: Used React functionality (State/Effect) instead of Redux, as the app state is simple enough to not warrant the extra boilerplate.
+- **Visualizations**: Charts/Graphs were skipped in favor of a clean, text-based Category Summary grid to keep the UI lightweight and accessible.
+
