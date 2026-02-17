@@ -32,13 +32,30 @@ function ExpenseList({ refreshTrigger }) {
 
     const totalAmount = expenses.reduce((sum, expense) => sum + expense.amount, 0);
 
+    // Calculate category totals
+    const categoryTotals = expenses.reduce((acc, expense) => {
+        acc[expense.category] = (acc[expense.category] || 0) + expense.amount;
+        return acc;
+    }, {});
+
     return (
         <div className="expense-section">
-            <div className="summary-card card">
-                <div className="summary-content">
-                    <span className="summary-label">Total Expenses</span>
-                    <span className="summary-amount">₹{(totalAmount / 100).toFixed(2)}</span>
+            <div className="summary-grid">
+                <div className="summary-card card total-card">
+                    <div className="summary-content">
+                        <span className="summary-label">Total Expenses</span>
+                        <span className="summary-amount">₹{(totalAmount / 100).toFixed(2)}</span>
+                    </div>
                 </div>
+
+                {Object.entries(categoryTotals).map(([category, amount]) => (
+                    <div key={category} className="summary-card card category-card">
+                        <div className="summary-content">
+                            <span className="summary-label">{category}</span>
+                            <span className="summary-amount">₹{(amount / 100).toFixed(2)}</span>
+                        </div>
+                    </div>
+                ))}
             </div>
 
             <div className="controls-card card">

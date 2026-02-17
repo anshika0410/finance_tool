@@ -353,3 +353,40 @@ button:disabled {
     background-color: #f3f4f6;
     color: #374151;
 }
+
+/* Summary Grid */
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.summary-card {
+    color: white;
+    margin-bottom: 0;
+    /* Reset for grid */
+}
+
+.total-card {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+}
+
+.category-card {
+    background: var(--card-bg);
+    border-left: 4px solid var(--primary-color);
+}
+
+.category-card .summary-content {
+    color: var(--text-main);
+}
+
+.category-card .summary-label {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.category-card .summary-amount {
+    font-size: 1.5rem;
+    font-weight: 700;
+}

@@ -35,8 +35,17 @@ exports.getExpenses = (req, res) => {
 exports.createExpense = (req, res) => {
     const { amount, category, description, date, idempotencyKey } = req.body;
 
+    // Validation
     if (!amount || !category || !description || !date) {
         return res.status(400).json({ error: 'Missing required fields' });
+    }
+
+    if (amount <= 0) {
+        return res.status(400).json({ error: 'Amount must be a positive number' });
+    }
+
+    if (isNaN(Date.parse(date))) {
+        return res.status(400).json({ error: 'Invalid date format' });
     }
 
     // Idempotency check: if key provided, check if exists
