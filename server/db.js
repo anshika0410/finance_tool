@@ -3,7 +3,7 @@ const path = require('path');
 
 const dbPath = process.env.NODE_ENV === 'test'
     ? ':memory:'
-    : path.resolve(__dirname, 'expenses.db');
+    : (process.env.VERCEL ? path.join('/tmp', 'expenses.db') : path.resolve(__dirname, 'expenses.db'));
 
 console.log(`[DB] Environment: ${process.env.NODE_ENV}, Path: ${dbPath}`);
 
